@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+   
+   .h1{
+	   align-items: center;
+	   text-align: center;
+   }
+    body {
+            display: flex;
+            background-color: rgb(136, 142, 195);
+            justify-content: space-around;
+            flex-direction: column;
+            height: 150vh;
+            margin: 0;
+            color: white;
+        }
+        .container-wrapper {
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+    }
+        .container {
+            width: 40%;
+            padding: 60px;
+            border-color: green;
+            margin-bottom: 20px;
+             margin-right: 30px; 
+
+        }
+        .players-container {
+            display: flex;
+            justify-content: center;
+
+        }
+        .player-heading {
+            text-align: center; 
+        }
+        .Cards-box {
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+        }
+
+        .box-holder {
+            display: flex;
+            justify-content: center;
+        }
+        .player-details{
+			 display: flex;
+            justify-content: center;
+		}
+
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        label.radio-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        label.radio-label input[type="radio"] {
+            margin-right: 5px;
+        }
+        label.radio-label span {
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color:orange;
+            border-radius: 8px;
+            cursor: pointer;
+
+        }
+</style>
+</head>
+<body>
+	 <div class="container-wrapper">
+		 	<h1>Welcome To Mangatha Game</h1>
+
+	<div  class="container">
+		
+		<h2>Player 1</h2>
+		<form method="post" action="mangathaGame">
+		
+			<label for="Player1Name">Player Name:</label>
+			<input type="text" id = "Player1Name" name="Player1Name">
+		
+			<label for="Player1Amount">Bet Amount:</label>
+			<input type="text" id = "Player1Amount" name="Player1Amount">
+			
+			<label for="Player1CardPos">In or Out:</label>
+			<input type="text" id = "Player1CardPos" name="Player1CardPos">
+		
+			<label for="Player1Card">Card Type:</label>
+			<input type="text" id = "Player1Card" name="Player1Card">
+			<button type="submit" class="loadData" name = "submitButton" value="player1">Submit</button>
+		
+		</form>
+	</div>
+	<div class="container">
+		<h2>Player 2</h2>
+		<form method="post" action="mangathaGame">
+			<label for="Player2Name">Player Name:</label>
+			<input type="text" id = "Player2Name" name="Player2Name">
+			
+			<label for="Player2Amount">Bet Amount:</label>
+			<input type="text" id = "Player2Amount" name="Player2Amount">
+			
+			<label for="Player2CardPosition">In or Out:</label>
+			<input type="text" id = "Player2CardPos" name="Player2CardPos">
+			
+			<label for="Player2Card">Card Type:</label>
+			<input type="text" id = "Player2Card" name="Player2Card">
+			<button type="submit" class="loadData" name = "submitButton" value="player2">Submit</button>
+		</form>
+	
+	</div>
+	 </div>
+	 <div class = "player-details">
+		 <div class="Cards-box" id="inCards">
+        	<h3><span th:text="${p1Name}">Player1</span></h3>
+        	<p>Bet Amount - <span th:text="${p1Amount}">Bet Amount</span></p>
+        	<p>In or Out - <span th:text="${p1CardType}">In or Out</span></p>
+        	<p>Card Position - <span th:text="${p1CardPos}">Card Position</span></p>
+        	
+    	</div>
+    	<div class="Cards-box" id="inCards">
+        	<h3><span th:text="${p2Name}">Player2</span></h3>
+        	<p>Bet Amount - <span th:text="${p2Amount}">Bet Amount</span></p>
+        	<p>In or Out - <span th:text="${p2CardType}">In or Out</span></p>
+        	<p>Card Position - <span th:text="${p2CardPos}">Card Position</span></p>
+        	
+    	</div>
+		 
+	 </div>
+
+	
+	<div class = "box-holder">
+		<div class="Cards-box" id="inCards">
+        <h3>In Cards</h3>
+        <p>
+            <span th:text="${reading}" th:if="${round % 2 == 1}">next Card</span>
+        </p>
+    	</div>
+		
+		<div class = "Game">
+		<form method="post" action="mangathaGame">
+						<button type="submit" class="Dealer" name = "Dealer" value="Dealer" th:disabled="${winner}">Dealer</button>
+
+			<p>Round</p>
+			<p><span th:text="${round}">Round</span></p>
+			<p><span th:text="${winner}">Winner Name</span></p>
+		</form>
+		</div>
+		
+		<div class="Cards-box" id="outCards">
+			<h3>Out Cards</h3>
+			<p>
+            	<span th:text="${reading}" th:if="${round % 2 == 0}">next Card</span>
+        	</p>
+
+		</div>
+		
+	</div>
+
+
+</body>
+</html>
+
